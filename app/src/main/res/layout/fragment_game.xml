@@ -7,37 +7,6 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/cardImageViewContainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/leftPicker"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionView">
-
-        <ImageView
-            android:id="@+id/cardImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/cardTitleView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:padding="32dp"
-            android:textColor="@color/textColorAccent"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            tools:text="bottom text" />
-
-    </FrameLayout>
-
     <TextView
         android:id="@+id/titleView"
         android:layout_width="0dp"
@@ -62,6 +31,68 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleView" />
+
+    <FrameLayout
+        android:id="@+id/staticCardImageViewContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/leftPicker"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionView">
+
+        <ImageView
+            android:id="@+id/staticCardImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/staticCardTitleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:padding="32dp"
+            android:textColor="@color/textColorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="bottom text" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/dynamicCardImageViewContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/leftPicker"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionView">
+
+        <ImageView
+            android:id="@+id/dynamicCardImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/dynamicCardTitleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:padding="32dp"
+            android:textColor="@color/textColorAccent"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="bottom text" />
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/leftPicker"

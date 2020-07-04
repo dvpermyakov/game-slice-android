@@ -41,32 +41,59 @@ class GameFragment : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        cardImageViewContainer.setOnTouchListener { v, event ->
-            if (event.action == MotionEvent.ACTION_MOVE) {
-                v.y = event.rawY - v.height / 2
-                v.x = event.rawX - v.width / 2
+        dynamicCardImageViewContainer.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_MOVE -> {
+                    v.y = event.rawY - v.height / 2
+                    v.x = event.rawX - v.width / 2
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_OUTSIDE -> {
+                    viewModel.nextCard()
+                    v.x = staticCardImageViewContainer.x
+                    v.y = staticCardImageViewContainer.y
+                }
             }
             true
         }
 
         viewModel.getGameState().observe(viewLifecycleOwner, Observer { state ->
             when (state) {
-                GameState.Loading -> TODO()
                 is GameState.NextCard -> {
                     descriptionView.text = state.title
                     leftPicker.text = state.leftTitle
                     rightPicker.text = state.rightTitle
 
-                    val card = state.currentCard
-                    cardImageView.post {
+                    val currentCard = state.currentCard
+                    dynamicCardImageView.post {
                         Picasso.get()
-                            .load(card.image)
-                            .resize(cardImageView.measuredWidth, cardImageView.measuredHeight)
+                            .load(currentCard.image)
+                            .resize(
+                                dynamicCardImageView.measuredWidth,
+                                dynamicCardImageView.measuredHeight
+                            )
                             .centerCrop()
                             .transform(RoundedCornersTransformation(32, 0))
-                            .into(cardImageView)
+                            .into(dynamicCardImageView)
                     }
-                    cardTitleView.text = card.name
+                    dynamicCardTitleView.text = currentCard.name
+
+                    val nextCard = state.nextCard
+                    if (nextCard != null) {
+                        staticCardImageView.post {
+                            Picasso.get()
+                                .load(nextCard.image)
+                                .resize(
+                                    staticCardImageView.measuredWidth,
+                                    staticCardImageView.measuredHeight
+                                )
+                                .centerCrop()
+                                .transform(RoundedCornersTransformation(32, 0))
+                                .into(staticCardImageView)
+                        }
+                        staticCardTitleView.text = nextCard.name
+                    }
+                }
+                is GameState.GameEnd -> {
                 }
             }
         })
