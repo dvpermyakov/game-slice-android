@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -22,5 +23,36 @@
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp">
+
+        <com.dvpermyakov.slice.game.ui.GamePickerView
+            android:id="@+id/leftPicker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp"
+            app:image="@drawable/ic_launcher_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/rightPicker"
+            app:title="Игра престолов" />
+
+        <com.dvpermyakov.slice.game.ui.GamePickerView
+            android:id="@+id/rightPicker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp"
+            app:image="@drawable/ic_launcher_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/leftPicker"
+            app:layout_constraintRight_toRightOf="parent"
+            app:title="Властелин колец" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
