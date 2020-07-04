@@ -1,4 +1,4 @@
-package com.dvpermyakov.slice
+package com.dvpermyakov.slice.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
