@@ -29,29 +29,39 @@
         android:layout_height="match_parent"
         android:layout_marginTop="8dp">
 
-        <com.dvpermyakov.slice.game.ui.GamePickerView
+        <TextView
             android:id="@+id/leftPicker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingTop="32dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/bg_answer_left"
+            android:gravity="center"
+            android:paddingTop="24dp"
             android:paddingBottom="32dp"
-            app:image="@drawable/ic_launcher_background"
+            android:text="Игра\nпрестолов"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/rightPicker"
-            app:title="Игра престолов" />
+            app:layout_constraintRight_toLeftOf="@+id/rightPicker" />
 
-        <com.dvpermyakov.slice.game.ui.GamePickerView
+        <TextView
             android:id="@+id/rightPicker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingTop="32dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/bg_answer_right"
+            android:gravity="center"
+            android:paddingTop="24dp"
             android:paddingBottom="32dp"
-            app:image="@drawable/ic_launcher_background"
+            android:text="Властелин\nколец"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/leftPicker"
-            app:layout_constraintRight_toRightOf="parent"
-            app:title="Властелин колец" />
+            app:layout_constraintRight_toRightOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
