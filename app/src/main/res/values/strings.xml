@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Game Slice Android</string>
+
+    <string name="game_title">Задание</string>
+    <string name="game_description">Разделите героев сериала</string>
+    <string name="game_left_choice">Игра\nпрестолов</string>
+    <string name="game_right_choice">Властелин\nколец</string>
 </resources>

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Задание"
+        android:text="@string/game_title"
         android:textSize="20sp" />
 
     <TextView
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Разделите героев сериала"
+        android:text="@string/game_description"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -38,7 +38,7 @@
             android:gravity="center"
             android:paddingTop="24dp"
             android:paddingBottom="32dp"
-            android:text="Игра\nпрестолов"
+            android:text="@string/game_left_choice"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -55,7 +55,7 @@
             android:gravity="center"
             android:paddingTop="24dp"
             android:paddingBottom="32dp"
-            android:text="Властелин\nколец"
+            android:text="@string/game_right_choice"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold"
