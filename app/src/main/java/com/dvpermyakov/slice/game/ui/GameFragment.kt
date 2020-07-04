@@ -1,8 +1,9 @@
 package com.dvpermyakov.slice.game.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -36,8 +37,17 @@ class GameFragment : Fragment(), KodeinAware {
         return inflater.inflate(R.layout.fragment_game, container, false)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        cardImageViewContainer.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_MOVE) {
+                v.y = event.rawY - v.height / 2
+                v.x = event.rawX - v.width / 2
+            }
+            true
+        }
 
         viewModel.getGameState().observe(viewLifecycleOwner, Observer { state ->
             when (state) {
