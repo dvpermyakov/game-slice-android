@@ -2,7 +2,7 @@ package com.dvpermyakov.slice
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.dvpermyakov.slice.game.ui.GameFragment
+import com.dvpermyakov.slice.result.ui.ResultFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.container, GameFragment.newInstance())
+                .add(R.id.container, ResultFragment.newInstance())
                 .commit()
         }
     }
