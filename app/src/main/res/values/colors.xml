@@ -6,5 +6,5 @@
 
     <color name="textColorPrimary">#000000</color>
     <color name="textColorAccent">#FFFFFF</color>
-    <color name="textColorGrey">#AAAAAA</color>
+    <color name="textColorGrey">#CCCCCC</color>
 </resources>

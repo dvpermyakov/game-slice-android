@@ -13,6 +13,7 @@
         android:fadingEdgeLength="64dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
+        android:paddingBottom="88dp"
         android:requiresFadingEdge="vertical" />
 
     <Button
