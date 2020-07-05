@@ -32,15 +32,17 @@ class ResultAdapter : RecyclerView.Adapter<ResultAdapter.MyViewHolder>() {
         RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(item: ResultItem) {
-            Picasso.get()
-                .load(item.image)
-                .resize(
-                    imageView.measuredWidth,
-                    imageView.measuredHeight
-                )
-                .centerCrop()
-                .transform(RoundedCornersTransformation(32, 0))
-                .into(imageView)
+            imageView.post {
+                Picasso.get()
+                    .load(item.image)
+                    .resize(
+                        imageView.measuredWidth,
+                        imageView.measuredHeight
+                    )
+                    .centerCrop()
+                    .transform(RoundedCornersTransformation(32, 0))
+                    .into(imageView)
+            }
         }
     }
 }
