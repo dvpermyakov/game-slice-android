@@ -40,6 +40,9 @@ class ResultFragment : Fragment(), KodeinAware {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.addItemDecoration(
+            MarginItemDecoration(resources.getDimension(R.dimen.result_padding).toInt())
+        )
 
         viewModel.getResultState().observe(viewLifecycleOwner, Observer { state ->
             adapter.items = state.items
