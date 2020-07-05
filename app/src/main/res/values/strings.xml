@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Game Slice Android</string>
     <string name="game_title">Задание</string>
+    <string name="result_header_title">Ваш результат</string>
     <string name="result_retry">Попробовать еще раз</string>
     <string name="result_right">Верно</string>
     <string name="result_wrong">Неверно</string>

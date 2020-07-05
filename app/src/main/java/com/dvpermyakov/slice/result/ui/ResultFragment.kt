@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.dvpermyakov.slice.R
 import com.dvpermyakov.slice.result.presentation.ResultViewModel
 import kotlinx.android.synthetic.main.fragment_result.*
@@ -39,12 +40,23 @@ class ResultFragment : Fragment(), KodeinAware {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = GridLayoutManager(context, 2).apply {
+            spanSizeLookup = object : SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return when (adapter.getItemViewType(position)) {
+                        ResultAdapter.VIEW_TYPE_HEADER -> 2
+                        ResultAdapter.VIEW_TYPE_ITEM -> 1
+                        else -> 1
+                    }
+                }
+            }
+        }
         recyclerView.addItemDecoration(
             MarginItemDecoration(resources.getDimension(R.dimen.result_padding).toInt())
         )
 
         viewModel.getResultState().observe(viewLifecycleOwner, Observer { state ->
+            adapter.header = state.header
             adapter.items = state.items
         })
 

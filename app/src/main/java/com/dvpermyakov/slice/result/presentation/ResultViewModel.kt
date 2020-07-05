@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dvpermyakov.slice.game.domain.GameCard
 import com.dvpermyakov.slice.game.domain.GameRepository
+import com.dvpermyakov.slice.result.ui.ResultHeader
 import com.dvpermyakov.slice.result.ui.ResultItem
 
 class ResultViewModel(
@@ -28,7 +29,11 @@ class ResultViewModel(
                         extraDescription = if (index % 2 == 0) card.getDeckName() else null,
                         isRight = index % 2 != 0
                     )
-                }
+                },
+                header = ResultHeader(
+                    title = game.title,
+                    description = "10 / 12"
+                )
             )
         )
     }

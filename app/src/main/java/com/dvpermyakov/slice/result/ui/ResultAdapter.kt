@@ -10,29 +10,62 @@ import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.layout_result.*
+import kotlinx.android.synthetic.main.layout_result_header.*
 
-class ResultAdapter : RecyclerView.Adapter<ResultAdapter.MyViewHolder>() {
+class ResultAdapter : RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
 
+    var header: ResultHeader? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
     var items: List<ResultItem> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount() = items.size + 1
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MyViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.layout_result, parent, false)
-    )
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(items[position])
+    override fun getItemViewType(position: Int): Int {
+        return if (position == 0) {
+            VIEW_TYPE_HEADER
+        } else {
+            VIEW_TYPE_ITEM
+        }
     }
 
-    class MyViewHolder(override val containerView: View) :
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(
+            if (viewType == VIEW_TYPE_ITEM) {
+                R.layout.layout_result
+            } else {
+                R.layout.layout_result_header
+            },
+            parent,
+            false
+        )
+    )
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (holder.itemViewType == VIEW_TYPE_ITEM) {
+            holder.bindItem(items[position - 1])
+        } else if (holder.itemViewType == VIEW_TYPE_HEADER) {
+            header?.let { header ->
+                holder.bindHeader(header)
+            }
+        }
+    }
+
+    class ViewHolder(override val containerView: View) :
         RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-        fun bind(item: ResultItem) {
+        fun bindHeader(header: ResultHeader) {
+            headerTitleView.text = header.title
+            headerDescriptionView.text = header.description
+        }
+
+        fun bindItem(item: ResultItem) {
             val context = containerView.context
 
             imageView.post {
@@ -67,5 +100,10 @@ class ResultAdapter : RecyclerView.Adapter<ResultAdapter.MyViewHolder>() {
                 View.GONE
             }
         }
+    }
+
+    companion object {
+        const val VIEW_TYPE_HEADER = 0
+        const val VIEW_TYPE_ITEM = 1
     }
 }
