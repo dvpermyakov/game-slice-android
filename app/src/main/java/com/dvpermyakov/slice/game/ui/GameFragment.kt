@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dvpermyakov.slice.R
 import com.dvpermyakov.slice.game.presentation.GameState
 import com.dvpermyakov.slice.game.presentation.GameViewModel
+import com.dvpermyakov.slice.router.MainRouter
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.fragment_game.*
@@ -65,35 +66,41 @@ class GameFragment : Fragment(), KodeinAware {
 
                     val currentCard = state.currentCard
                     dynamicCardImageView.post {
-                        Picasso.get()
-                            .load(currentCard.image)
-                            .resize(
-                                dynamicCardImageView.measuredWidth,
-                                dynamicCardImageView.measuredHeight
-                            )
-                            .centerCrop()
-                            .transform(RoundedCornersTransformation(32, 0))
-                            .into(dynamicCardImageView)
+                        if (dynamicCardImageView != null) {
+                            Picasso.get()
+                                .load(currentCard.image)
+                                .resize(
+                                    dynamicCardImageView.measuredWidth,
+                                    dynamicCardImageView.measuredHeight
+                                )
+                                .centerCrop()
+                                .transform(RoundedCornersTransformation(32, 0))
+                                .into(dynamicCardImageView)
+                        }
                     }
                     dynamicCardTitleView.text = currentCard.name
 
                     val nextCard = state.nextCard
                     if (nextCard != null) {
                         staticCardImageView.post {
-                            Picasso.get()
-                                .load(nextCard.image)
-                                .resize(
-                                    staticCardImageView.measuredWidth,
-                                    staticCardImageView.measuredHeight
-                                )
-                                .centerCrop()
-                                .transform(RoundedCornersTransformation(32, 0))
-                                .into(staticCardImageView)
+                            if (staticCardImageView != null) {
+                                Picasso.get()
+                                    .load(nextCard.image)
+                                    .resize(
+                                        staticCardImageView.measuredWidth,
+                                        staticCardImageView.measuredHeight
+                                    )
+                                    .centerCrop()
+                                    .transform(RoundedCornersTransformation(32, 0))
+                                    .into(staticCardImageView)
+                            }
                         }
                         staticCardTitleView.text = nextCard.name
                     }
                 }
                 is GameState.GameEnd -> {
+                    (activity as MainRouter).showResult()
+                    viewModel.clear()
                 }
             }
         })

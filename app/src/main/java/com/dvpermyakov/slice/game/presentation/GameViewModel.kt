@@ -13,7 +13,7 @@ class GameViewModel(
     private val gameState = MutableLiveData<GameState>()
 
     private val game = gameRepository.getGame()
-    private val cards = getRandomCardOrder()
+    private var cards: List<GameCard> = getRandomCardOrder()
     private var currentIndex = 0
 
     init {
@@ -31,6 +31,12 @@ class GameViewModel(
         } else {
             gameState.postValue(GameState.GameEnd)
         }
+    }
+
+    fun clear() {
+        currentIndex = 0
+        cards = getRandomCardOrder()
+        gameState.postValue(getCurrentCardState())
     }
 
     private fun getCurrentCardState() = GameState.NextCard(

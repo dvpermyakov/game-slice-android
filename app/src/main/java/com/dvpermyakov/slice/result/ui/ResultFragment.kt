@@ -61,7 +61,7 @@ class ResultFragment : Fragment(), KodeinAware {
         })
 
         retryButton.setOnClickListener {
-            viewModel.onRetryClick()
+            activity?.onBackPressed()
         }
     }
 

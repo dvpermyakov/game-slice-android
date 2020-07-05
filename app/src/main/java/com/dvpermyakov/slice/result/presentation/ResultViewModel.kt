@@ -42,9 +42,6 @@ class ResultViewModel(
         return resultState
     }
 
-    fun onRetryClick() {
-    }
-
     private fun getCardOrder(): List<GameCard> {
         return game.left.cards + game.right.cards
     }
