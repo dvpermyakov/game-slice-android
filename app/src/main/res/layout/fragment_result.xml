@@ -4,12 +4,13 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.dvpermyakov.slice.result.ui.FadingEdgeRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:clipToPadding="false"
+        android:fadingEdge="vertical"
         android:fadingEdgeLength="64dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
