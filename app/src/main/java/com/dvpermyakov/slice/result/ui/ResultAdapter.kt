@@ -1,5 +1,6 @@
 package com.dvpermyakov.slice.result.ui
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,8 @@ class ResultAdapter : RecyclerView.Adapter<ResultAdapter.MyViewHolder>() {
         RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(item: ResultItem) {
+            val context = containerView.context
+
             imageView.post {
                 Picasso.get()
                     .load(item.image)
@@ -43,8 +46,26 @@ class ResultAdapter : RecyclerView.Adapter<ResultAdapter.MyViewHolder>() {
                     .transform(RoundedCornersTransformation(32, 0))
                     .into(imageView)
             }
+            if (item.isRight) {
+                rightTextView.text = context.getString(R.string.result_right)
+                rightTextView.background = context.getDrawable(R.drawable.shape_right)
+            } else {
+                rightTextView.text = context.getString(R.string.result_wrong)
+                rightTextView.background = context.getDrawable(R.drawable.shape_wrong)
+            }
+
             titleView.text = item.title
             descriptionView.text = item.description
+            if (item.isDescriptionCrossed) {
+                descriptionView.paintFlags =
+                    descriptionView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }
+            extraDescriptionView.text = item.extraDescription
+            extraDescriptionView.visibility = if (item.extraDescription != null) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
     }
 }

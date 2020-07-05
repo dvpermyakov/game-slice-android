@@ -19,11 +19,14 @@ class ResultViewModel(
     init {
         resultState.postValue(
             ResultState(
-                items = cards.map { card ->
+                items = cards.mapIndexed { index, card ->
                     ResultItem(
                         image = card.image,
                         title = card.name,
-                        description = "123"
+                        description = "123",
+                        isDescriptionCrossed = index % 2 == 0,
+                        extraDescription = if (index % 2 == 0) "456" else null,
+                        isRight = index % 2 != 0
                     )
                 }
             )
