@@ -15,17 +15,20 @@
         android:paddingRight="16dp"
         android:requiresFadingEdge="vertical" />
 
-    <TextView
+    <Button
+        android:id="@+id/retryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:background="@drawable/bg_button"
         android:gravity="center"
         android:paddingLeft="64dp"
+        android:paddingTop="16dp"
         android:paddingRight="64dp"
-        android:paddingBottom="8dp"
-        android:text="Попробовать еще раз"
+        android:paddingBottom="32dp"
+        android:text="@string/result_retry"
+        android:textAllCaps="false"
         android:textColor="@color/textColorPrimary"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
 </FrameLayout>

@@ -47,6 +47,10 @@ class ResultFragment : Fragment(), KodeinAware {
         viewModel.getResultState().observe(viewLifecycleOwner, Observer { state ->
             adapter.items = state.items
         })
+
+        retryButton.setOnClickListener {
+            viewModel.onRetryClick()
+        }
     }
 
     companion object {
