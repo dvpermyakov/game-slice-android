@@ -43,6 +43,8 @@ class ResultAdapter : RecyclerView.Adapter<ResultAdapter.MyViewHolder>() {
                     .transform(RoundedCornersTransformation(32, 0))
                     .into(imageView)
             }
+            titleView.text = item.title
+            descriptionView.text = item.description
         }
     }
 }

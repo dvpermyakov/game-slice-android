@@ -6,4 +6,5 @@
 
     <color name="textColorPrimary">#000000</color>
     <color name="textColorAccent">#FFFFFF</color>
+    <color name="textColorGrey">#AAAAAA</color>
 </resources>
