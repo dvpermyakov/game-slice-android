@@ -53,8 +53,8 @@ class GameFragment : Fragment(), KodeinAware {
                     downY = event.rawY
                 }
                 MotionEvent.ACTION_MOVE -> {
-                    val diffX = downX - event.rawX
-                    val diffY = downY - event.rawY
+                    val diffX = max(-v.width / 2f, min(v.width / 2f, downX - event.rawX))
+                    val diffY = max(-v.height / 4f, min(v.height / 4f, downY - event.rawY))
                     v.x = staticCardImageViewContainer.x - diffX
                     v.y = staticCardImageViewContainer.y - diffY
                     v.rotation = max(-30f, min(30f, -diffX * 0.1f))
