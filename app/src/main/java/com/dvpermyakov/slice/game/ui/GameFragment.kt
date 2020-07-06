@@ -19,6 +19,8 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import kotlin.math.max
+import kotlin.math.min
 
 class GameFragment : Fragment(), KodeinAware {
 
@@ -41,16 +43,35 @@ class GameFragment : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var downX = 0f
+        var downY = 0f
         dynamicCardImageViewContainer.setOnTouchListener { v, event ->
             when (event.action) {
-                MotionEvent.ACTION_MOVE -> {
-                    v.y = event.rawY - v.height / 2
-                    v.x = event.rawX - v.width / 2
+                MotionEvent.ACTION_DOWN -> {
+                    downX = event.rawX
+                    downY = event.rawY
                 }
-                MotionEvent.ACTION_UP, MotionEvent.ACTION_OUTSIDE -> {
+                MotionEvent.ACTION_MOVE -> {
+                    val diffX = downX - event.rawX
+                    val diffY = downY - event.rawY
+                    v.x = staticCardImageViewContainer.x - diffX
+                    v.y = staticCardImageViewContainer.y - diffY
+                    v.rotation = max(-30f, min(30f, diffX * 0.1f))
+                    val scale = max(-.2f, min(.2f, (diffX / dynamicCardImageViewContainer.width)))
+                    leftPicker.scaleX = 1f + scale
+                    leftPicker.scaleY = 1f + scale
+                    rightPicker.scaleX = 1f - scale
+                    rightPicker.scaleY = 1f - scale
+                }
+                MotionEvent.ACTION_UP -> {
                     viewModel.nextCard()
                     v.x = staticCardImageViewContainer.x
                     v.y = staticCardImageViewContainer.y
+                    v.rotation = 0f
+                    leftPicker.scaleX = 1f
+                    leftPicker.scaleY = 1f
+                    rightPicker.scaleX = 1f
+                    rightPicker.scaleY = 1f
                 }
             }
             true
@@ -66,13 +87,15 @@ class GameFragment : Fragment(), KodeinAware {
                     rightPicker.text = state.rightTitle
 
                     val currentCard = state.currentCard
-                    val currentCardBitmap = BitmapFactory.decodeStream(assetManager.open(currentCard.image))
+                    val currentCardBitmap =
+                        BitmapFactory.decodeStream(assetManager.open(currentCard.image))
                     dynamicCardImageView.setImageBitmap(currentCardBitmap)
                     dynamicCardTitleView.text = currentCard.name
 
                     val nextCard = state.nextCard
                     if (nextCard != null) {
-                        val nextCardBitmap = BitmapFactory.decodeStream(assetManager.open(nextCard.image))
+                        val nextCardBitmap =
+                            BitmapFactory.decodeStream(assetManager.open(nextCard.image))
                         staticCardImageView.setImageBitmap(nextCardBitmap)
                         staticCardTitleView.text = nextCard.name
                     }
