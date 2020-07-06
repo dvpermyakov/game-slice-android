@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dvpermyakov.slice.game.domain.GameCard
+import com.dvpermyakov.slice.game.domain.GameCardResult
 import com.dvpermyakov.slice.game.domain.GameRepository
 
 class GameViewModel(
@@ -15,6 +16,7 @@ class GameViewModel(
     private val game = gameRepository.getGame()
     private var cards: List<GameCard> = getRandomCardOrder()
     private var currentIndex = 0
+    private val result: MutableList<GameCardResult> = mutableListOf()
 
     init {
         gameState.postValue(getCurrentCardState())
@@ -24,7 +26,11 @@ class GameViewModel(
         return gameState
     }
 
-    fun nextCard() {
+    fun chooseDeck(isLeft: Boolean) {
+        val card = cards[currentIndex]
+        result.add(
+            GameCardResult(gameCard = card, isLeft = isLeft)
+        )
         if (currentIndex < cards.lastIndex) {
             currentIndex++
             gameState.postValue(getCurrentCardState())
@@ -48,6 +54,6 @@ class GameViewModel(
     )
 
     private fun getRandomCardOrder(): List<GameCard> {
-        return game.left.cards + game.right.cards
+        return (game.left.cards + game.right.cards).shuffled()
     }
 }

@@ -66,8 +66,8 @@ class GameFragment : Fragment(), KodeinAware {
                 }
                 MotionEvent.ACTION_UP -> {
                     val diffX = downX - event.rawX
-                    if (abs(diffX) > v.width / 3f) {
-                        viewModel.nextCard()
+                    if (abs(diffX) > v.width / 10f) {
+                        viewModel.chooseDeck(diffX < 0f)
                     }
                     v.x = staticCardImageViewContainer.x
                     v.y = staticCardImageViewContainer.y
