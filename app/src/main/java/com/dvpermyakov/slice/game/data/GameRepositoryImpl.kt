@@ -58,6 +58,6 @@ class GameRepositoryImpl(
 
     companion object {
         private const val ASSET_FILE = "game.json"
-        private const val ASSET_URI = "file:///android_asset/%s.jpg"
+        private const val ASSET_URI = "%s.jpg"
     }
 }

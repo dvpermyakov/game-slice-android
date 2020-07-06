@@ -1,6 +1,7 @@
 package com.dvpermyakov.slice.game.ui
 
 import android.annotation.SuppressLint
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -13,8 +14,6 @@ import com.dvpermyakov.slice.R
 import com.dvpermyakov.slice.game.presentation.GameState
 import com.dvpermyakov.slice.game.presentation.GameViewModel
 import com.dvpermyakov.slice.router.MainRouter
-import com.squareup.picasso.Picasso
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation
 import kotlinx.android.synthetic.main.fragment_game.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -58,6 +57,8 @@ class GameFragment : Fragment(), KodeinAware {
         }
 
         viewModel.getGameState().observe(viewLifecycleOwner, Observer { state ->
+            val assetManager = requireContext().assets
+
             when (state) {
                 is GameState.NextCard -> {
                     descriptionView.text = state.title
@@ -65,36 +66,14 @@ class GameFragment : Fragment(), KodeinAware {
                     rightPicker.text = state.rightTitle
 
                     val currentCard = state.currentCard
-                    dynamicCardImageView.post {
-                        if (dynamicCardImageView != null) {
-                            Picasso.get()
-                                .load(currentCard.image)
-                                .resize(
-                                    dynamicCardImageView.measuredWidth,
-                                    dynamicCardImageView.measuredHeight
-                                )
-                                .centerCrop()
-                                .transform(RoundedCornersTransformation(32, 0))
-                                .into(dynamicCardImageView)
-                        }
-                    }
+                    val currentCardBitmap = BitmapFactory.decodeStream(assetManager.open(currentCard.image))
+                    dynamicCardImageView.setImageBitmap(currentCardBitmap)
                     dynamicCardTitleView.text = currentCard.name
 
                     val nextCard = state.nextCard
                     if (nextCard != null) {
-                        staticCardImageView.post {
-                            if (staticCardImageView != null) {
-                                Picasso.get()
-                                    .load(nextCard.image)
-                                    .resize(
-                                        staticCardImageView.measuredWidth,
-                                        staticCardImageView.measuredHeight
-                                    )
-                                    .centerCrop()
-                                    .transform(RoundedCornersTransformation(32, 0))
-                                    .into(staticCardImageView)
-                            }
-                        }
+                        val nextCardBitmap = BitmapFactory.decodeStream(assetManager.open(nextCard.image))
+                        staticCardImageView.setImageBitmap(nextCardBitmap)
                         staticCardTitleView.text = nextCard.name
                     }
                 }
