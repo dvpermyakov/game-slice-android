@@ -69,13 +69,9 @@ class GameFragment : Fragment(), KodeinAware {
                     if (abs(diffX) > v.width / 10f) {
                         viewModel.chooseDeck(diffX > 0f)
                     }
-                    v.x = staticCardImageViewContainer.x
-                    v.y = staticCardImageViewContainer.y
-                    v.rotation = 0f
-                    leftPicker.scaleX = 1f
-                    leftPicker.scaleY = 1f
-                    rightPicker.scaleX = 1f
-                    rightPicker.scaleY = 1f
+                    v.animate().rotation(0f).x(staticCardImageViewContainer.x).y(staticCardImageViewContainer.y)
+                    leftPicker.animate().scaleX(1f).scaleY(1f)
+                    rightPicker.animate().scaleX(1f).scaleY(1f)
                 }
             }
             true
