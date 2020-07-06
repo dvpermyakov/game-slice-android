@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -40,15 +41,52 @@ class GameFragment : Fragment(), KodeinAware {
         return inflater.inflate(R.layout.fragment_game, container, false)
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        secondCardContainer.setTouchListener()
+        viewModel.getGameState().observe(viewLifecycleOwner, Observer { state ->
+            when (state) {
+                is GameState.NextCard -> {
+                    descriptionView.text = state.title
+                    leftPicker.text = state.leftTitle
+                    rightPicker.text = state.rightTitle
+
+                    val currentCard = state.currentCard
+                    secondCardContainer.visibility = View.VISIBLE
+                    secondCardImageView.setImage(currentCard.image)
+                    secondCardTitleView.text = currentCard.name
+
+                    val nextCard = state.nextCard
+                    if (nextCard != null) {
+                        firstCardImageView.setImage(nextCard.image)
+                        firstCardTitleView.text = nextCard.name
+                    } else {
+                        firstCardImageView.setImageResource(R.color.colorBlack)
+                        firstCardTitleView.text = ""
+                    }
+                }
+                is GameState.GameEnd -> {
+                    (activity as MainRouter).showResult(state.resultId)
+                    viewModel.clear()
+                }
+            }
+        })
+    }
+
+    private fun ImageView.setImage(image: String) {
+        val stream = context.assets.open(image)
+        val bitmap = BitmapFactory.decodeStream(stream)
+        setImageBitmap(bitmap)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun View.setTouchListener() {
         var viewX = 0f
         var viewY = 0f
         var downX = 0f
         var downY = 0f
-        dynamicCardImageViewContainer.setOnTouchListener { v, event ->
+        setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     viewX = v.x
@@ -69,50 +107,29 @@ class GameFragment : Fragment(), KodeinAware {
                     rightPicker.scaleY = 1f - scale
                 }
                 MotionEvent.ACTION_UP -> {
-                    val diffX = downX - event.rawX
-                    if (abs(diffX) > v.width / 10f) {
-                        viewModel.chooseDeck(diffX > 0f)
+                    val diffX = event.rawX - downX
+                    val diffY = event.rawY - downY
+                    val scaleX = diffX / v.width
+                    if (abs(scaleX) > .1f) {
+                        v.animate()
+                            .xBy(diffX * 5)
+                            .yBy(diffY * 5)
+                            .withEndAction {
+                                v.visibility = View.GONE
+                                v.rotation = 0f
+                                v.x = viewX
+                                v.y = viewY
+                                viewModel.chooseDeck(diffX < 0f)
+                            }
+                    } else {
+                        v.animate().rotation(0f).x(viewX).y(viewY)
                     }
-                    v.animate().rotation(0f).x(viewX).y(viewY)
                     leftPicker.animate().scaleX(1f).scaleY(1f)
                     rightPicker.animate().scaleX(1f).scaleY(1f)
                 }
             }
             true
         }
-
-        viewModel.getGameState().observe(viewLifecycleOwner, Observer { state ->
-            val assetManager = requireContext().assets
-
-            when (state) {
-                is GameState.NextCard -> {
-                    descriptionView.text = state.title
-                    leftPicker.text = state.leftTitle
-                    rightPicker.text = state.rightTitle
-
-                    val currentCard = state.currentCard
-                    val currentCardBitmap =
-                        BitmapFactory.decodeStream(assetManager.open(currentCard.image))
-                    dynamicCardImageView.setImageBitmap(currentCardBitmap)
-                    dynamicCardTitleView.text = currentCard.name
-
-                    val nextCard = state.nextCard
-                    if (nextCard != null) {
-                        val nextCardBitmap =
-                            BitmapFactory.decodeStream(assetManager.open(nextCard.image))
-                        staticCardImageView.setImageBitmap(nextCardBitmap)
-                        staticCardTitleView.text = nextCard.name
-                    } else {
-                        staticCardImageView.setImageResource(R.color.colorBlack)
-                        staticCardTitleView.text = ""
-                    }
-                }
-                is GameState.GameEnd -> {
-                    (activity as MainRouter).showResult(state.resultId)
-                    viewModel.clear()
-                }
-            }
-        })
     }
 
     companion object {
