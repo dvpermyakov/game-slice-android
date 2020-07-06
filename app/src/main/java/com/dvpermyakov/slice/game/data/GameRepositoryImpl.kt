@@ -2,10 +2,7 @@ package com.dvpermyakov.slice.game.data
 
 import android.content.res.AssetManager
 import android.util.Log
-import com.dvpermyakov.slice.game.domain.Game
-import com.dvpermyakov.slice.game.domain.GameCard
-import com.dvpermyakov.slice.game.domain.GameDeck
-import com.dvpermyakov.slice.game.domain.GameRepository
+import com.dvpermyakov.slice.game.domain.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 import java.io.IOException
@@ -14,6 +11,8 @@ import java.io.InputStream
 class GameRepositoryImpl(
     private val assetManager: AssetManager
 ) : GameRepository {
+
+    private val results = mutableListOf<GameResult>()
 
     override fun getGame(): Game {
         val gameDto = assetManager.safetyRead(ASSET_FILE)?.let { jsonValue ->
@@ -26,6 +25,10 @@ class GameRepositoryImpl(
             left = gameDto.items[0].toDomain(),
             right = gameDto.items[1].toDomain()
         )
+    }
+
+    override fun saveGameResult(result: GameResult) {
+        results.add(result)
     }
 
     private fun GameDeckDto.toDomain() = GameDeck(

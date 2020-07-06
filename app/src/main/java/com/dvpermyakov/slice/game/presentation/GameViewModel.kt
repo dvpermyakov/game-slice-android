@@ -29,7 +29,7 @@ class GameViewModel(
     fun chooseDeck(isLeft: Boolean) {
         val card = cards[currentIndex]
         result.add(
-            GameCardResult(gameCard = card, isLeft = isLeft)
+            GameCardResult(gameCard = card, isCorrect = game.isLeftForCard(card) == isLeft)
         )
         if (currentIndex < cards.lastIndex) {
             currentIndex++

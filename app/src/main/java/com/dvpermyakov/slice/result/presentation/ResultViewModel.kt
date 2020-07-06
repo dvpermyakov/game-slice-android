@@ -24,9 +24,9 @@ class ResultViewModel(
                     ResultItem(
                         image = card.image,
                         title = card.name,
-                        description = card.getDeckName(),
+                        description = game.getDeckNameForCard(card),
                         isDescriptionCrossed = index % 2 == 0,
-                        extraDescription = if (index % 2 == 0) card.getDeckName() else null,
+                        extraDescription = if (index % 2 == 0) game.getDeckNameForCard(card) else null,
                         isRight = index % 2 != 0
                     )
                 },
@@ -44,19 +44,5 @@ class ResultViewModel(
 
     private fun getCardOrder(): List<GameCard> {
         return game.left.cards + game.right.cards
-    }
-
-    private fun GameCard.getDeckName(): String {
-        return when {
-            game.left.cards.any { card -> card.name == name } -> {
-                game.left.title
-            }
-            game.right.cards.any { card -> card.name == name } -> {
-                game.right.title
-            }
-            else -> {
-                error("Didn't find deck for $name")
-            }
-        }
     }
 }
