@@ -57,7 +57,7 @@ class GameFragment : Fragment(), KodeinAware {
                     val diffY = downY - event.rawY
                     v.x = staticCardImageViewContainer.x - diffX
                     v.y = staticCardImageViewContainer.y - diffY
-                    v.rotation = max(-30f, min(30f, diffX * 0.1f))
+                    v.rotation = max(-30f, min(30f, -diffX * 0.1f))
                     val scale = max(-.2f, min(.2f, (diffX / v.width)))
                     leftPicker.scaleX = 1f + scale
                     leftPicker.scaleY = 1f + scale
