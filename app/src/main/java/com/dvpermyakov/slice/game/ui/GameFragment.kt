@@ -44,19 +44,23 @@ class GameFragment : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var viewX = 0f
+        var viewY = 0f
         var downX = 0f
         var downY = 0f
         dynamicCardImageViewContainer.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
+                    viewX = v.x
+                    viewY = v.y
                     downX = event.rawX
                     downY = event.rawY
                 }
                 MotionEvent.ACTION_MOVE -> {
                     val diffX = max(-v.width / 2f, min(v.width / 2f, downX - event.rawX))
                     val diffY = max(-v.height / 4f, min(v.height / 4f, downY - event.rawY))
-                    v.x = staticCardImageViewContainer.x - diffX
-                    v.y = staticCardImageViewContainer.y - diffY
+                    v.x = viewX - diffX
+                    v.y = viewY - diffY
                     v.rotation = max(-30f, min(30f, -diffX * 0.1f))
                     val scale = max(-.2f, min(.2f, (diffX / v.width)))
                     leftPicker.scaleX = 1f + scale
@@ -69,7 +73,7 @@ class GameFragment : Fragment(), KodeinAware {
                     if (abs(diffX) > v.width / 10f) {
                         viewModel.chooseDeck(diffX > 0f)
                     }
-                    v.animate().rotation(0f).x(staticCardImageViewContainer.x).y(staticCardImageViewContainer.y)
+                    v.animate().rotation(0f).x(viewX).y(viewY)
                     leftPicker.animate().scaleX(1f).scaleY(1f)
                     rightPicker.animate().scaleX(1f).scaleY(1f)
                 }
@@ -98,6 +102,9 @@ class GameFragment : Fragment(), KodeinAware {
                             BitmapFactory.decodeStream(assetManager.open(nextCard.image))
                         staticCardImageView.setImageBitmap(nextCardBitmap)
                         staticCardTitleView.text = nextCard.name
+                    } else {
+                        staticCardImageView.setImageResource(R.color.colorBlack)
+                        staticCardTitleView.text = ""
                     }
                 }
                 is GameState.GameEnd -> {
