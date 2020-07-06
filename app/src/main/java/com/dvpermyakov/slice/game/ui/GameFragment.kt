@@ -19,6 +19,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
@@ -57,14 +58,17 @@ class GameFragment : Fragment(), KodeinAware {
                     v.x = staticCardImageViewContainer.x - diffX
                     v.y = staticCardImageViewContainer.y - diffY
                     v.rotation = max(-30f, min(30f, diffX * 0.1f))
-                    val scale = max(-.2f, min(.2f, (diffX / dynamicCardImageViewContainer.width)))
+                    val scale = max(-.2f, min(.2f, (diffX / v.width)))
                     leftPicker.scaleX = 1f + scale
                     leftPicker.scaleY = 1f + scale
                     rightPicker.scaleX = 1f - scale
                     rightPicker.scaleY = 1f - scale
                 }
                 MotionEvent.ACTION_UP -> {
-                    viewModel.nextCard()
+                    val diffX = downX - event.rawX
+                    if (abs(diffX) > v.width / 3f) {
+                        viewModel.nextCard()
+                    }
                     v.x = staticCardImageViewContainer.x
                     v.y = staticCardImageViewContainer.y
                     v.rotation = 0f
