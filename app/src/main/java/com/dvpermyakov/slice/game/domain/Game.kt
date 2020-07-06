@@ -27,6 +27,20 @@ data class Game(
         }
     }
 
+    fun getOppositeDeckNameForCard(card: GameCard): String {
+        return when {
+            left.cards.any { leftCard -> leftCard.name == card.name } -> {
+                getRightTitle()
+            }
+            right.cards.any { rightCard -> rightCard.name == card.name } -> {
+                getLeftTitle()
+            }
+            else -> {
+                error("Didn't find deck for $card")
+            }
+        }
+    }
+
     fun isLeftForCard(card: GameCard): Boolean {
         return when {
             left.cards.any { leftCard -> leftCard.name == card.name } -> {

@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity(), MainRouter {
         }
     }
 
-    override fun showResult() {
+    override fun showResult(resultId: Long) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container, ResultFragment.newInstance())
+            .replace(R.id.container, ResultFragment.newInstance(resultId))
             .addToBackStack(null)
             .commit()
     }

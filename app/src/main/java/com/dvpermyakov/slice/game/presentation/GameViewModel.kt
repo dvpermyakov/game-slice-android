@@ -36,19 +36,21 @@ class GameViewModel(
             currentIndex++
             gameState.postValue(getCurrentCardState())
         } else {
+            val resultId = System.currentTimeMillis()
             gameRepository.saveGameResult(
                 GameResult(
-                    id = System.currentTimeMillis(),
-                    cards = cardsResult
+                    id = resultId,
+                    cards = ArrayList(cardsResult)
                 )
             )
-            gameState.postValue(GameState.GameEnd)
+            gameState.postValue(GameState.GameEnd(resultId))
         }
     }
 
     fun clear() {
-        currentIndex = 0
         cards = getRandomCardOrder()
+        currentIndex = 0
+        cardsResult.clear()
         gameState.postValue(getCurrentCardState())
     }
 

@@ -69,7 +69,7 @@ class ResultAdapter : RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
             val bitmap = BitmapFactory.decodeStream(context.assets.open(item.image))
             imageView.setImageBitmap(bitmap)
 
-            if (item.isRight) {
+            if (item.isCorrect) {
                 rightTextView.text = context.getString(R.string.result_right)
                 rightTextView.background = context.getDrawable(R.drawable.shape_right)
             } else {

@@ -6,5 +6,5 @@ data class ResultItem(
     val description: String,
     val isDescriptionCrossed: Boolean,
     val extraDescription: String?,
-    val isRight: Boolean
+    val isCorrect: Boolean
 )

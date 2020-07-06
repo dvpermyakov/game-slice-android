@@ -1,5 +1,5 @@
 package com.dvpermyakov.slice.router
 
 interface MainRouter {
-    fun showResult()
+    fun showResult(resultId: Long)
 }

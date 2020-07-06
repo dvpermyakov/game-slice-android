@@ -31,6 +31,10 @@ class GameRepositoryImpl(
         results.add(result)
     }
 
+    override fun getGameResult(id: Long): GameResult {
+        return results.first { result -> result.id == id }
+    }
+
     private fun GameDeckDto.toDomain() = GameDeck(
         title = this.title,
         cards = this.items.map { cardDto -> cardDto.toDomain() }

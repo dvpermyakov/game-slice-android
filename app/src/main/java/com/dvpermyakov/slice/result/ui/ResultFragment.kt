@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +28,11 @@ class ResultFragment : Fragment(), KodeinAware {
     }
 
     override val kodein: Kodein by closestKodein()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.setResultId(arguments!!.getLong(KEY_RESULT_ID))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,6 +72,10 @@ class ResultFragment : Fragment(), KodeinAware {
     }
 
     companion object {
-        fun newInstance() = ResultFragment()
+        private const val KEY_RESULT_ID = "KEY_RESULT_ID"
+
+        fun newInstance(resultId: Long) = ResultFragment().apply {
+            arguments = bundleOf(KEY_RESULT_ID to resultId)
+        }
     }
 }
