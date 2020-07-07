@@ -120,6 +120,7 @@ class GameFragment : Fragment(), KodeinAware {
                     val scaleX = diffX / v.width
                     if (abs(scaleX) > .1f) {
                         v.animate()
+                            .setDuration(200)
                             .alpha(0f)
                             .xBy(sign(diffX) * speed)
                             .yBy(diffY / abs(diffX) * speed)
@@ -133,8 +134,14 @@ class GameFragment : Fragment(), KodeinAware {
                     } else {
                         v.animate().rotation(0f).x(viewX).y(viewY)
                     }
-                    leftPicker.animate().scaleX(1f).scaleY(1f)
-                    rightPicker.animate().scaleX(1f).scaleY(1f)
+                    leftPicker.animate()
+                        .setDuration(200)
+                        .scaleX(1f)
+                        .scaleY(1f)
+                    rightPicker.animate()
+                        .setDuration(200)
+                        .scaleX(1f)
+                        .scaleY(1f)
                 }
             }
             true
