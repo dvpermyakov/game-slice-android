@@ -1,4 +1,4 @@
-package com.dvpermyakov.slice.result.ui
+package com.dvpermyakov.slice.screens.result.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.dvpermyakov.slice.R
-import com.dvpermyakov.slice.result.presentation.ResultViewModel
+import com.dvpermyakov.slice.screens.result.presentation.ResultViewModel
 import kotlinx.android.synthetic.main.fragment_result.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware

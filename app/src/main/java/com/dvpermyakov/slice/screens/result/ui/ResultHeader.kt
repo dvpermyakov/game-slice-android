@@ -1,4 +1,4 @@
-package com.dvpermyakov.slice.result.ui
+package com.dvpermyakov.slice.screens.result.ui
 
 data class ResultHeader(
     val title: String,

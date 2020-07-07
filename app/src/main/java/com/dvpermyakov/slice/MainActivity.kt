@@ -2,8 +2,8 @@ package com.dvpermyakov.slice
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.dvpermyakov.slice.game.ui.GameFragment
-import com.dvpermyakov.slice.result.ui.ResultFragment
+import com.dvpermyakov.slice.screens.game.ui.GameFragment
+import com.dvpermyakov.slice.screens.result.ui.ResultFragment
 import com.dvpermyakov.slice.router.MainRouter
 
 class MainActivity : AppCompatActivity(), MainRouter {

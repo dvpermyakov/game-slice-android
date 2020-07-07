@@ -1,4 +1,4 @@
-package com.dvpermyakov.slice.game.domain
+package com.dvpermyakov.slice.domain
 
 interface GameRepository {
     fun getGame(): Game

@@ -1,4 +1,4 @@
-package com.dvpermyakov.slice.result.ui
+package com.dvpermyakov.slice.screens.result.ui
 
 import android.content.Context
 import android.util.AttributeSet

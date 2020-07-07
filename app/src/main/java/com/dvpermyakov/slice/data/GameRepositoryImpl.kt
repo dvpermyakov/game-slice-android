@@ -1,8 +1,8 @@
-package com.dvpermyakov.slice.game.data
+package com.dvpermyakov.slice.data
 
 import android.content.res.AssetManager
 import android.util.Log
-import com.dvpermyakov.slice.game.domain.*
+import com.dvpermyakov.slice.domain.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 import java.io.IOException

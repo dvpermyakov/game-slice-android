@@ -1,4 +1,4 @@
-package com.dvpermyakov.slice.game.domain
+package com.dvpermyakov.slice.domain
 
 data class Game(
     val title: String,

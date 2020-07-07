@@ -1,6 +1,6 @@
-package com.dvpermyakov.slice.game.presentation
+package com.dvpermyakov.slice.screens.game.presentation
 
-import com.dvpermyakov.slice.game.domain.GameCard
+import com.dvpermyakov.slice.domain.GameCard
 
 sealed class GameState {
     data class NextCard(

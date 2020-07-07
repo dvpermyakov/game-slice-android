@@ -1,4 +1,4 @@
-package com.dvpermyakov.slice.game.ui
+package com.dvpermyakov.slice.screens.game.ui
 
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.dvpermyakov.slice.R
-import com.dvpermyakov.slice.game.presentation.GameState
-import com.dvpermyakov.slice.game.presentation.GameViewModel
+import com.dvpermyakov.slice.screens.game.presentation.GameState
+import com.dvpermyakov.slice.screens.game.presentation.GameViewModel
 import com.dvpermyakov.slice.router.MainRouter
 import kotlinx.android.synthetic.main.fragment_game.*
 import org.kodein.di.Kodein

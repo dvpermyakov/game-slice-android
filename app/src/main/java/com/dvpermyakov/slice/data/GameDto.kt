@@ -1,4 +1,4 @@
-package com.dvpermyakov.slice.game.data
+package com.dvpermyakov.slice.data
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

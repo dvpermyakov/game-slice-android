@@ -1,13 +1,13 @@
-package com.dvpermyakov.slice.result.presentation
+package com.dvpermyakov.slice.screens.result.presentation
 
 import android.content.res.AssetManager
 import android.graphics.BitmapFactory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dvpermyakov.slice.game.domain.GameRepository
-import com.dvpermyakov.slice.result.ui.ResultHeader
-import com.dvpermyakov.slice.result.ui.ResultItem
+import com.dvpermyakov.slice.domain.GameRepository
+import com.dvpermyakov.slice.screens.result.ui.ResultHeader
+import com.dvpermyakov.slice.screens.result.ui.ResultItem
 
 class ResultViewModel(
     private val gameRepository: GameRepository,

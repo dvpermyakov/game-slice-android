@@ -1,12 +1,12 @@
-package com.dvpermyakov.slice.game.presentation
+package com.dvpermyakov.slice.screens.game.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dvpermyakov.slice.game.domain.GameCard
-import com.dvpermyakov.slice.game.domain.GameCardResult
-import com.dvpermyakov.slice.game.domain.GameRepository
-import com.dvpermyakov.slice.game.domain.GameResult
+import com.dvpermyakov.slice.domain.GameCard
+import com.dvpermyakov.slice.domain.GameCardResult
+import com.dvpermyakov.slice.domain.GameRepository
+import com.dvpermyakov.slice.domain.GameResult
 
 class GameViewModel(
     private val gameRepository: GameRepository

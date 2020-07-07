@@ -3,10 +3,10 @@ package com.dvpermyakov.slice
 import android.app.Application
 import android.content.res.AssetManager
 import androidx.lifecycle.ViewModelProvider
-import com.dvpermyakov.slice.game.data.GameRepositoryImpl
-import com.dvpermyakov.slice.game.domain.GameRepository
-import com.dvpermyakov.slice.game.presentation.GameViewModel
-import com.dvpermyakov.slice.result.presentation.ResultViewModel
+import com.dvpermyakov.slice.data.GameRepositoryImpl
+import com.dvpermyakov.slice.domain.GameRepository
+import com.dvpermyakov.slice.screens.game.presentation.GameViewModel
+import com.dvpermyakov.slice.screens.result.presentation.ResultViewModel
 import com.dvpermyakov.slice.utils.ViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
