@@ -23,6 +23,7 @@ import org.kodein.di.generic.instance
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.sign
 
 class GameFragment : Fragment(), KodeinAware {
 
@@ -54,6 +55,7 @@ class GameFragment : Fragment(), KodeinAware {
 
                     val currentCard = state.currentCard
                     secondCardContainer.visibility = View.VISIBLE
+                    secondCardContainer.alpha = 1f
                     secondCardImageView.setImage(currentCard.image)
                     secondCardTitleView.text = currentCard.name
 
@@ -61,9 +63,11 @@ class GameFragment : Fragment(), KodeinAware {
                     if (nextCard != null) {
                         firstCardImageView.setImage(nextCard.image)
                         firstCardTitleView.text = nextCard.name
+                        progressBar.visibility = View.GONE
                     } else {
                         firstCardImageView.setImageResource(R.color.colorBlack)
                         firstCardTitleView.text = ""
+                        progressBar.visibility = View.VISIBLE
                     }
                 }
                 is GameState.GameEnd -> {
@@ -109,11 +113,14 @@ class GameFragment : Fragment(), KodeinAware {
                 MotionEvent.ACTION_UP -> {
                     val diffX = event.rawX - downX
                     val diffY = event.rawY - downY
+                    val speed = v.width * .4f
+
                     val scaleX = diffX / v.width
                     if (abs(scaleX) > .1f) {
                         v.animate()
-                            .xBy(diffX * 5)
-                            .yBy(diffY * 5)
+                            .alpha(0f)
+                            .xBy(sign(diffX) * speed)
+                            .yBy(diffY / abs(diffX) * speed)
                             .withEndAction {
                                 v.visibility = View.GONE
                                 v.rotation = 0f
