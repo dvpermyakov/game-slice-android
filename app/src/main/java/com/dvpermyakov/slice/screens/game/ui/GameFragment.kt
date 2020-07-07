@@ -95,8 +95,8 @@ class GameFragment : Fragment(), KodeinAware {
         setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    viewX = v.x
-                    viewY = v.y
+                    viewX = firstCardContainer.x
+                    viewY = firstCardContainer.y
                     downX = event.rawX
                     downY = event.rawY
                 }
