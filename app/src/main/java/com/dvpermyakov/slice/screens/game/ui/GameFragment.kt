@@ -56,6 +56,8 @@ class GameFragment : Fragment(), KodeinAware {
                     val currentCard = state.currentCard
                     secondCardContainer.visibility = View.VISIBLE
                     secondCardContainer.alpha = 1f
+                    secondCardContainer.x = firstCardContainer.x
+                    secondCardContainer.y = firstCardContainer.y
                     secondCardImageView.setImage(currentCard.image)
                     secondCardTitleView.text = currentCard.name
 
