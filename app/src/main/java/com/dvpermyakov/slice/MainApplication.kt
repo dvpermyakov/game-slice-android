@@ -28,7 +28,7 @@ class MainApplication : Application(), KodeinAware {
             GameViewModel(instance())
         }
         bind<ResultViewModel>(tag = ResultViewModel::class.java.simpleName) with provider {
-            ResultViewModel(instance())
+            ResultViewModel(instance(), instance())
         }
     }
 }

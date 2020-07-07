@@ -1,6 +1,5 @@
 package com.dvpermyakov.slice.result.ui
 
-import android.graphics.BitmapFactory
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -66,8 +65,7 @@ class ResultAdapter : RecyclerView.Adapter<ResultAdapter.ViewHolder>() {
 
         fun bindItem(item: ResultItem) {
             val context = containerView.context
-            val bitmap = BitmapFactory.decodeStream(context.assets.open(item.image))
-            imageView.setImageBitmap(bitmap)
+            imageView.setImageBitmap(item.image)
 
             if (item.isCorrect) {
                 rightTextView.text = context.getString(R.string.result_right)

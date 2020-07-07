@@ -1,5 +1,7 @@
 package com.dvpermyakov.slice.result.presentation
 
+import android.content.res.AssetManager
+import android.graphics.BitmapFactory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +10,8 @@ import com.dvpermyakov.slice.result.ui.ResultHeader
 import com.dvpermyakov.slice.result.ui.ResultItem
 
 class ResultViewModel(
-    private val gameRepository: GameRepository
+    private val gameRepository: GameRepository,
+    private val assetManager: AssetManager
 ) : ViewModel() {
 
     private val game = gameRepository.getGame()
@@ -29,8 +32,9 @@ class ResultViewModel(
                         }
                     val extraDescription =
                         if (isCorrect.not()) game.getDeckNameForCard(card) else null
+                    val bitmap = BitmapFactory.decodeStream(assetManager.open(card.image))
                     ResultItem(
-                        image = card.image,
+                        image = bitmap,
                         title = card.name,
                         description = description,
                         isDescriptionCrossed = isCorrect.not(),
