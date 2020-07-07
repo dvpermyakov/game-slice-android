@@ -63,11 +63,11 @@ class GameFragment : Fragment(), KodeinAware {
                     if (nextCard != null) {
                         firstCardImageView.setImage(nextCard.image)
                         firstCardTitleView.text = nextCard.name
-                        progressBar.visibility = View.GONE
+                        firstCardProgressBar.visibility = View.GONE
                     } else {
                         firstCardImageView.setImageResource(R.color.colorBlack)
                         firstCardTitleView.text = ""
-                        progressBar.visibility = View.VISIBLE
+                        firstCardProgressBar.visibility = View.VISIBLE
                     }
                 }
                 is GameState.GameEnd -> {
