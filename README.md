@@ -1,3 +1,3 @@
-# Game slice android
+# Game slice
 
 <img src="misc/image/app_anim.gif" width="336" align="left" hspace="20">
