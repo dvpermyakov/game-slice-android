@@ -31,7 +31,8 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleView" />
+        app:layout_constraintTop_toBottomOf="@+id/titleView"
+        tools:text="New game for our cards" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/firstCardContainer"
@@ -93,7 +94,8 @@
             android:id="@+id/secondCardImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            tools:src="@drawable/test" />
 
         <TextView
             android:id="@+id/secondCardTitleView"
@@ -122,7 +124,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/rightPicker" />
+        app:layout_constraintRight_toLeftOf="@+id/rightPicker"
+        tools:text="Left" />
 
     <TextView
         android:id="@+id/rightPicker"
@@ -138,6 +141,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/leftPicker"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="Right" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
