@@ -1,3 +1,4 @@
+include ':navigation'
 include ':feature-game'
 include ':domain'
 include ':app'

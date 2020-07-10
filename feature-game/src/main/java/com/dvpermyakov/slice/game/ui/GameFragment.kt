@@ -15,6 +15,7 @@ import androidx.navigation.findNavController
 import com.dvpermyakov.slice.game.R
 import com.dvpermyakov.slice.game.presentation.GameState
 import com.dvpermyakov.slice.game.presentation.GameViewModel
+import com.dvpermyakov.slice.navigation.Router
 import kotlinx.android.synthetic.main.fragment_game.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -34,6 +35,7 @@ class GameFragment : Fragment(), KodeinAware {
             viewModeFactory
         ).get(GameViewModel::class.java)
     }
+    private val router: Router by instance()
 
     override val kodein: Kodein by closestKodein()
 
@@ -76,8 +78,7 @@ class GameFragment : Fragment(), KodeinAware {
                     }
                 }
                 is GameState.GameEnd -> {
-//                    val action = GameFragmentDirections.actionShowResult(state.resultId)
-//                    view.findNavController().navigate(action)
+                    view.findNavController().navigate(router.toResult(state.resultId))
                     viewModel.clear()
                 }
             }
