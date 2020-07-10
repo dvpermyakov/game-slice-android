@@ -13,6 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.dvpermyakov.slice.game.R
+import com.dvpermyakov.slice.game.presentation.GameState
+import com.dvpermyakov.slice.game.presentation.GameViewModel
 import kotlinx.android.synthetic.main.fragment_game.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -26,11 +28,11 @@ import kotlin.math.sign
 class GameFragment : Fragment(), KodeinAware {
 
     private val viewModeFactory: ViewModelProvider.Factory by instance()
-    private val viewModel: com.dvpermyakov.slice.game.presentation.GameViewModel by lazy {
+    private val viewModel: GameViewModel by lazy {
         ViewModelProvider(
             this,
             viewModeFactory
-        ).get(com.dvpermyakov.slice.game.presentation.GameViewModel::class.java)
+        ).get(GameViewModel::class.java)
     }
 
     override val kodein: Kodein by closestKodein()
@@ -49,7 +51,7 @@ class GameFragment : Fragment(), KodeinAware {
         secondCardContainer.setTouchListener()
         viewModel.getGameState().observe(viewLifecycleOwner, Observer { state ->
             when (state) {
-                is com.dvpermyakov.slice.game.presentation.GameState.NextCard -> {
+                is GameState.NextCard -> {
                     descriptionView.text = state.title
                     leftPicker.text = state.leftTitle
                     rightPicker.text = state.rightTitle
@@ -73,7 +75,7 @@ class GameFragment : Fragment(), KodeinAware {
                         firstCardProgressBar.visibility = View.VISIBLE
                     }
                 }
-                is com.dvpermyakov.slice.game.presentation.GameState.GameEnd -> {
+                is GameState.GameEnd -> {
 //                    val action = GameFragmentDirections.actionShowResult(state.resultId)
 //                    view.findNavController().navigate(action)
                     viewModel.clear()
