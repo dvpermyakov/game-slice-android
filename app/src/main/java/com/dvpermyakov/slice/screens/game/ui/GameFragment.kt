@@ -11,10 +11,10 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.dvpermyakov.slice.R
 import com.dvpermyakov.slice.screens.game.presentation.GameState
 import com.dvpermyakov.slice.screens.game.presentation.GameViewModel
-import com.dvpermyakov.slice.router.MainRouter
 import kotlinx.android.synthetic.main.fragment_game.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -73,7 +73,8 @@ class GameFragment : Fragment(), KodeinAware {
                     }
                 }
                 is GameState.GameEnd -> {
-                    (activity as MainRouter).showResult(state.resultId)
+                    val action = GameFragmentDirections.actionShowResult(state.resultId)
+                    view.findNavController().navigate(action)
                     viewModel.clear()
                 }
             }
@@ -146,9 +147,5 @@ class GameFragment : Fragment(), KodeinAware {
             }
             true
         }
-    }
-
-    companion object {
-        fun newInstance() = GameFragment()
     }
 }

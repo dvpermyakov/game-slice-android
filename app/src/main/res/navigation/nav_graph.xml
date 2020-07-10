@@ -12,8 +12,12 @@
         tools:layout="@layout/fragment_game">
 
         <action
-            android:id="@+id/action_gameFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
+            android:id="@+id/actionShowResult"
+            app:destination="@id/resultFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
 
     </fragment>
 
@@ -21,6 +25,12 @@
         android:id="@+id/resultFragment"
         android:name="com.dvpermyakov.slice.screens.result.ui.ResultFragment"
         android:label="ResultFragment"
-        tools:layout="@layout/fragment_result" />
+        tools:layout="@layout/fragment_result">
+
+        <argument
+            android:name="resultId"
+            app:argType="long" />
+
+    </fragment>
 
 </navigation>

@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.dvpermyakov.slice.R
@@ -27,11 +27,13 @@ class ResultFragment : Fragment(), KodeinAware {
         ViewModelProvider(this, viewModeFactory).get(ResultViewModel::class.java)
     }
 
+    private val args: ResultFragmentArgs by navArgs()
+
     override val kodein: Kodein by closestKodein()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.setResultId(arguments!!.getLong(KEY_RESULT_ID))
+        viewModel.setResultId(args.resultId)
     }
 
     override fun onCreateView(
@@ -68,14 +70,6 @@ class ResultFragment : Fragment(), KodeinAware {
 
         retryButton.setOnClickListener {
             activity?.onBackPressed()
-        }
-    }
-
-    companion object {
-        private const val KEY_RESULT_ID = "KEY_RESULT_ID"
-
-        fun newInstance(resultId: Long) = ResultFragment().apply {
-            arguments = bundleOf(KEY_RESULT_ID to resultId)
         }
     }
 }
