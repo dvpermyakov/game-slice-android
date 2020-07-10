@@ -43,14 +43,21 @@ class GameViewModel(
                     cards = ArrayList(cardsResult)
                 )
             )
-            gameState.postValue(GameState.GameEnd(resultId))
+            gameState.postValue(
+                GameState.GameEnd(
+                    resultId = resultId,
+                    handled = false
+                )
+            )
         }
     }
 
-    fun clear() {
-        cards = getRandomCardOrder()
-        currentIndex = 0
-        cardsResult.clear()
+    fun onViewCreated() {
+        if (gameState.value is GameState.GameEnd) {
+            cards = getRandomCardOrder()
+            currentIndex = 0
+            cardsResult.clear()
+        }
         gameState.postValue(getCurrentCardState())
     }
 

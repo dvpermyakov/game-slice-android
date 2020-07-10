@@ -49,6 +49,7 @@ class GameFragment : Fragment(), KodeinAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.onViewCreated()
 
         secondCardContainer.setTouchListener()
         viewModel.getGameState().observe(viewLifecycleOwner, Observer { state ->
@@ -78,8 +79,10 @@ class GameFragment : Fragment(), KodeinAware {
                     }
                 }
                 is GameState.GameEnd -> {
-                    view.findNavController().navigate(router.toResult(state.resultId))
-                    viewModel.clear()
+                    if (state.handled.not()) {
+                        state.handled = true
+                        view.findNavController().navigate(router.toResult(state.resultId))
+                    }
                 }
             }
         })

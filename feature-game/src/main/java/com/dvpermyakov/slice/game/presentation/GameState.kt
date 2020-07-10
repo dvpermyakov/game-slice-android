@@ -11,5 +11,8 @@ sealed class GameState {
         val nextCard: GameCard?
     ) : GameState()
 
-    data class GameEnd(val resultId: Long) : GameState()
+    data class GameEnd(
+        val resultId: Long,
+        var handled: Boolean
+    ) : GameState()
 }
