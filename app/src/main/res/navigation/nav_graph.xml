@@ -5,6 +5,8 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/gameFragment">
 
+    <include app:graph="@navigation/result_graph" />
+
     <fragment
         android:id="@+id/gameFragment"
         android:name="com.dvpermyakov.slice.game.ui.GameFragment"
@@ -13,23 +15,17 @@
 
         <action
             android:id="@+id/actionShowResult"
-            app:destination="@id/resultFragment"
+            app:destination="@id/result_graph"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
+            app:popExitAnim="@anim/exit_to_right" >
 
-    </fragment>
+            <argument
+                android:name="resultId"
+                app:argType="long" />
 
-    <fragment
-        android:id="@+id/resultFragment"
-        android:name="com.dvpermyakov.slice.screens.result.ui.ResultFragment"
-        android:label="ResultFragment"
-        tools:layout="@layout/fragment_result">
-
-        <argument
-            android:name="resultId"
-            app:argType="long" />
+        </action>
 
     </fragment>
 

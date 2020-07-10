@@ -1,4 +1,4 @@
-package com.dvpermyakov.slice.screens.result.ui
+package com.dvpermyakov.slice.result.ui
 
 import android.graphics.Rect
 import android.view.View

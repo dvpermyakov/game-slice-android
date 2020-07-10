@@ -1,11 +1,11 @@
-package com.dvpermyakov.slice.screens.result.ui
+package com.dvpermyakov.slice.result.ui
 
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dvpermyakov.slice.R
+import com.dvpermyakov.slice.result.R
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.layout_result.*
 import kotlinx.android.synthetic.main.layout_result_header.*

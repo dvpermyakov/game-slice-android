@@ -4,11 +4,11 @@ import android.app.Application
 import android.content.res.AssetManager
 import androidx.lifecycle.ViewModelProvider
 import com.dvpermyakov.slice.data.GameRepositoryImpl
-import com.dvpermyakov.slice.data.RouterImpl
+import com.dvpermyakov.slice.navigation.RouterImpl
 import com.dvpermyakov.slice.domain.GameRepository
 import com.dvpermyakov.slice.game.presentation.GameViewModel
 import com.dvpermyakov.slice.navigation.Router
-import com.dvpermyakov.slice.screens.result.presentation.ResultViewModel
+import com.dvpermyakov.slice.result.presentation.ResultViewModel
 import com.dvpermyakov.slice.utils.ViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.direct
@@ -31,7 +31,10 @@ object KodeinFactory {
                 GameViewModel(instance())
             }
             bind<ResultViewModel>(tag = ResultViewModel::class.java.simpleName) with provider {
-                ResultViewModel(instance(), instance())
+                ResultViewModel(
+                    instance(),
+                    instance()
+                )
             }
         }
     }

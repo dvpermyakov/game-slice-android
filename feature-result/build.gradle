@@ -1,7 +1,6 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: "kotlinx-serialization"
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 androidExtensions {
@@ -13,7 +12,6 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.dvpermyakov.slice"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
@@ -33,8 +31,6 @@ android {
 dependencies {
     implementation project(":domain")
     implementation project(":navigation")
-    implementation project(":feature-game")
-    implementation project(":feature-result")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.0'
@@ -51,5 +47,4 @@ dependencies {
 
     implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_version"
     implementation "org.kodein.di:kodein-di-framework-android-x:$kodein_version"
-
 }

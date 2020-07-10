@@ -1,8 +1,7 @@
-package com.dvpermyakov.slice.data
+package com.dvpermyakov.slice.navigation
 
 import androidx.navigation.NavDirections
 import com.dvpermyakov.slice.game.ui.GameFragmentDirections
-import com.dvpermyakov.slice.navigation.Router
 
 class RouterImpl : Router {
 
