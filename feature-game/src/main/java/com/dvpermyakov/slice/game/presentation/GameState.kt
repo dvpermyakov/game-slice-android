@@ -1,4 +1,4 @@
-package com.dvpermyakov.slice.screens.game.presentation
+package com.dvpermyakov.slice.game.presentation
 
 import com.dvpermyakov.slice.domain.GameCard
 

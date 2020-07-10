@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.dvpermyakov.slice.screens.game.ui.GameFragment"
+        android:name="com.dvpermyakov.slice.game.ui.GameFragment"
         android:label="GameFragment"
         tools:layout="@layout/fragment_game">
 

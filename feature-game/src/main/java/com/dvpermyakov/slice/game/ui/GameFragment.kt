@@ -1,4 +1,4 @@
-package com.dvpermyakov.slice.screens.game.ui
+package com.dvpermyakov.slice.game.ui
 
 import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
@@ -12,9 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.dvpermyakov.slice.R
-import com.dvpermyakov.slice.screens.game.presentation.GameState
-import com.dvpermyakov.slice.screens.game.presentation.GameViewModel
+import com.dvpermyakov.slice.game.R
 import kotlinx.android.synthetic.main.fragment_game.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -28,8 +26,11 @@ import kotlin.math.sign
 class GameFragment : Fragment(), KodeinAware {
 
     private val viewModeFactory: ViewModelProvider.Factory by instance()
-    private val viewModel: GameViewModel by lazy {
-        ViewModelProvider(this, viewModeFactory).get(GameViewModel::class.java)
+    private val viewModel: com.dvpermyakov.slice.game.presentation.GameViewModel by lazy {
+        ViewModelProvider(
+            this,
+            viewModeFactory
+        ).get(com.dvpermyakov.slice.game.presentation.GameViewModel::class.java)
     }
 
     override val kodein: Kodein by closestKodein()
@@ -48,7 +49,7 @@ class GameFragment : Fragment(), KodeinAware {
         secondCardContainer.setTouchListener()
         viewModel.getGameState().observe(viewLifecycleOwner, Observer { state ->
             when (state) {
-                is GameState.NextCard -> {
+                is com.dvpermyakov.slice.game.presentation.GameState.NextCard -> {
                     descriptionView.text = state.title
                     leftPicker.text = state.leftTitle
                     rightPicker.text = state.rightTitle
@@ -72,9 +73,9 @@ class GameFragment : Fragment(), KodeinAware {
                         firstCardProgressBar.visibility = View.VISIBLE
                     }
                 }
-                is GameState.GameEnd -> {
-                    val action = GameFragmentDirections.actionShowResult(state.resultId)
-                    view.findNavController().navigate(action)
+                is com.dvpermyakov.slice.game.presentation.GameState.GameEnd -> {
+//                    val action = GameFragmentDirections.actionShowResult(state.resultId)
+//                    view.findNavController().navigate(action)
                     viewModel.clear()
                 }
             }

@@ -5,7 +5,7 @@ import android.content.res.AssetManager
 import androidx.lifecycle.ViewModelProvider
 import com.dvpermyakov.slice.data.GameRepositoryImpl
 import com.dvpermyakov.slice.domain.GameRepository
-import com.dvpermyakov.slice.screens.game.presentation.GameViewModel
+import com.dvpermyakov.slice.game.presentation.GameViewModel
 import com.dvpermyakov.slice.screens.result.presentation.ResultViewModel
 import com.dvpermyakov.slice.utils.ViewModelFactory
 import org.kodein.di.Kodein
